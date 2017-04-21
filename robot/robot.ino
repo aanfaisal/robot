@@ -3,16 +3,16 @@
 #include <Adafruit_PWMServoDriver.h>
 #include <LiquidCrystal.h>
 
-//Ini servo driver (defaults to addr 41)
+//Ini servo driver (defaults to addr 0x41)
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x41);
 
 #define MIN_PULSE_WIDTH       771
 #define MAX_PULSE_WIDTH       3036
 #define DEFAULT_PULSE_WIDTH   1500
 #define FREQUENCY             50
-#define SPEED                 600
+#define SPEED                 300
 
-int d = 300; //delay servo bawah
+int d = 150; //delay servo bawah
 
 //ini sensor2 jarak ultrasonik
 //sensorjarak kiri
@@ -36,12 +36,13 @@ int echo_pin4=11;
 // Kaki Servonya dikasih 
 uint8_t kakiA1 = 0;
 uint8_t kakiA2 = 1;
-uint8_t kakiB1 = 2;
-uint8_t kakiB2 = 3;
-uint8_t kakiC1 = 12;
-uint8_t kakiC2 = 13;
-uint8_t kakiD1 = 14;
-uint8_t kakiD2 = 15;
+uint8_t kakiB1 = 12;
+uint8_t kakiB2 = 13;
+
+uint8_t kakiC1 = 14;
+uint8_t kakiC2 = 15;
+uint8_t kakiD1 = 6;
+uint8_t kakiD2 = 7;
                   
 
 // Ini variabel sound dan flame
@@ -154,7 +155,7 @@ int pulseWidth(int angle)
 
 
 void loop(){
-//  tampil();
-  algoritma();
+  
+ algoritma();
 
 }

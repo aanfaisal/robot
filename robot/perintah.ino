@@ -1,19 +1,18 @@
 void algoritma(){
- sensor=analogRead(sound);
- buttonState=digitalRead(button);
+   sensor=analogRead(sound);
+   buttonState=digitalRead(button);
 
-      if(sensor < 500)
-      {
-       if (buttonState == HIGH)
-        {
-           if(cm0 <= 6)
+//      if(sensor < 500)
+//      {
+//        if(buttonState == HIGH)
+//        {
+          if(cm0 <= 6)
               {
-                hindar_kiri();
                 tampil();
+                hindar_kiri();
               }
             else if(cm4 <=10)
               {
-                tampil();
                 hindar_kanan();
                 tampil();
                 hindar_kanan();
@@ -37,11 +36,9 @@ void algoritma(){
               }
             else  
               {
-                tampil();
                 maju();
-                 
+                tampil();
               }
-
-        }
-     }
+//        }
+//     }
 }
