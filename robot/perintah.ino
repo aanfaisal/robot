@@ -2,10 +2,10 @@ void algoritma(){
  sensor=analogRead(sound);
  buttonState=digitalRead(button);
 
-//      if(sensor < 500)
-//      {
-//        if (buttonState == HIGH)
-//        {
+      if(sensor < 500)
+      {
+       if (buttonState == HIGH)
+        {
            if(cm0 <= 6)
               {
                 hindar_kiri();
@@ -42,6 +42,6 @@ void algoritma(){
                  
               }
 
-        //}
-//     }
+        }
+     }
 }

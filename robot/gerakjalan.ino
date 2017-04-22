@@ -3,7 +3,7 @@ void standby1(){
   pwm.setPWM(kakiA2, 0, pulseWidth(60));
   
   pwm.setPWM(kakiB1, 0, pulseWidth(60));//atasB
-  pwm.setPWM(kakiB2, 0, pulseWidth(60));
+  pwm.setPWM(kakiB2, 0, pulseWidth(60));tampil();
   
   pwm.setPWM(kakiC1, 0, pulseWidth(60));//atasC
   pwm.setPWM(kakiC2, 0, pulseWidth(60));
