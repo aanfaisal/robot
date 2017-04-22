@@ -38,11 +38,10 @@ uint8_t kakiA1 = 0;
 uint8_t kakiA2 = 1;
 uint8_t kakiB1 = 12;
 uint8_t kakiB2 = 13;
-
 uint8_t kakiC1 = 14;
 uint8_t kakiC2 = 15;
-uint8_t kakiD1 = 6;
-uint8_t kakiD2 = 7;
+uint8_t kakiD1 = 2;
+uint8_t kakiD2 = 3;
                   
 
 // Ini variabel sound dan flame

@@ -23,10 +23,6 @@ void tampil(){
    digitalWrite(trig_pin2,HIGH);
    delayMicroseconds(20);
    digitalWrite(trig_pin2,LOW);
-   delayMicroseconds(2);
-   digitalWrite(trig_pin2,HIGH);
-   delayMicroseconds(20);
-   digitalWrite(trig_pin2,LOW);
    pulse2=pulseIn(echo_pin2,HIGH);
    cm2=pulse2/58.138;
   
@@ -34,7 +30,7 @@ void tampil(){
    digitalWrite(trig_pin3,LOW);
    delayMicroseconds(2);
    digitalWrite(trig_pin3,HIGH);
-   delayMicroseconds(10);
+   delayMicroseconds(20);
    digitalWrite(trig_pin3,LOW);
    pulse3=pulseIn(echo_pin3,HIGH);
    cm3=pulse3/58.138;
@@ -43,7 +39,7 @@ void tampil(){
    digitalWrite(trig_pin4,LOW);
    delayMicroseconds(2);
    digitalWrite(trig_pin4,HIGH);
-   delayMicroseconds(10);
+   delayMicroseconds(20);
    digitalWrite(trig_pin4,LOW);
    pulse4=pulseIn(echo_pin4,HIGH);
    cm4=pulse4/58.138; 
