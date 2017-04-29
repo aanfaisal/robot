@@ -1,6 +1,4 @@
 void algoritma(){
-   sensor=analogRead(sound);
-   buttonState=digitalRead(button);
 
 //      if(sensor < 500)
 //      {

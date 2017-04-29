@@ -46,13 +46,13 @@ void standby2() {
 //gerak maju______sweep di bagian maju
 void maju() {
   //iki mundur
-  pwm.setPWM(kakiA1, 0, pulseWidth(100));
+  pwm.setPWM(kakiA1, 0, pulseWidth(100)); tampil();
 
   //sweep B
   pwm.setPWM(kakiB2, 0, pulseWidth(35));
   delay(d);
   //iki maju B
-  pwm.setPWM(kakiB1, 0, pulseWidth(80));//atasB
+  pwm.setPWM(kakiB1, 0, pulseWidth(80)); tampil();//atasB
   pwm.setPWM(kakiB2, 0, pulseWidth(62));
 
   //sweep D
@@ -67,20 +67,20 @@ void maju() {
 
   //...............batas suci........................//
   //iki mundur
-  pwm.setPWM(kakiB1, 0, pulseWidth(22));
+  pwm.setPWM(kakiB1, 0, pulseWidth(22)); tampil();
 
   //sweep A
   pwm.setPWM(kakiA2, 0, pulseWidth(38));
   delay(d);
   //iki maju
-  pwm.setPWM(kakiA1, 0, pulseWidth(40)); //atasA
+  pwm.setPWM(kakiA1, 0, pulseWidth(40)); tampil();//atasA
   pwm.setPWM(kakiA2, 0, pulseWidth(60));
 
   //sweep C
   pwm.setPWM(kakiC2, 0, pulseWidth(35));
   delay(d);
   //iki maju
-  pwm.setPWM(kakiC1, 0, pulseWidth(80)); //atasC
+  pwm.setPWM(kakiC1, 0, pulseWidth(80)); tampil();//atasC
   pwm.setPWM(kakiC2, 0, pulseWidth(60));
 
   //iki mundur

@@ -42,10 +42,13 @@ uint8_t kakiC1 = 14;
 uint8_t kakiC2 = 15;
 uint8_t kakiD1 = 2;
 uint8_t kakiD2 = 3;
+//ini motor
+uint8_t motor = 8;
                   
 
 // Ini variabel sound dan flame
-const int sound = A9;
+const int sound = 7;
+
 const int flame1 = A11;
 const int flame2 = A12;
 const int flame3 = A13; //flame tengah
@@ -60,7 +63,7 @@ int kondisi4 = 0;
 int kondisi5 = 0;
 
 //button
-int button = 51;
+int button = 52;
 
 // variables will change:
 int buttonState = 0;         // variable for reading the pushbutton status
@@ -93,8 +96,8 @@ void setup()
 {
   Serial.begin(9600);
   
-  //pin modenya untuk sound dan flame
-  pinMode(A9, INPUT);
+
+  //pinmode flame
   pinMode(A11, INPUT);
   pinMode(A12, INPUT);
   pinMode(A13, INPUT);
@@ -111,6 +114,10 @@ void setup()
   
   //ini pinmode pompa
   pinMode(A0, OUTPUT);
+
+
+  //pin modenya untuk sound
+  pinMode(7, INPUT);
 
   //ini pinmode button
   pinMode(button, INPUT);
@@ -139,6 +146,11 @@ void setup()
   //Setting PWM  
   pwm.begin();
   pwm.setPWMFreq(FREQUENCY);
+
+  //setting sound
+  sensor=digitalRead(sound);
+  buttonState=digitalRead(button);
+
 
 }
 
