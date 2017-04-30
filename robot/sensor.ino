@@ -11,7 +11,10 @@ void api(){
       {
         Serial.println("Api Terdeteksi");
         Serial.println("LED dan Pompa Nyala");
-        analogWrite(pompa, HIGH);
+        
+        //analogWrite(pompa, HIGH);
+        pwm.setPWM(motor, 0, pulseWidth(120)); //motor
+        
         digitalWrite(led, HIGH);
         delay(500);
         digitalWrite(led, LOW);
@@ -39,7 +42,8 @@ void api(){
       }
       else 
       {
-        analogWrite(pompa, LOW);
+       // analogWrite(pompa, LOW);
+        pwm.setPWM(motor, 0, pulseWidth(0)); //motor
         delay(kondisi3);
       }
 

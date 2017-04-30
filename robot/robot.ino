@@ -42,6 +42,7 @@ uint8_t kakiC1 = 14;
 uint8_t kakiC2 = 15;
 uint8_t kakiD1 = 2;
 uint8_t kakiD2 = 3;
+
 //ini motor
 uint8_t motor = 8;
                   
@@ -81,7 +82,7 @@ int gris2=0;
 int gris3=0;
 
 //Ini variabel Pompa Air
-int pompa = A0;
+//int pompa = A0;
 
 //LiquidCrystal lcd(RS, E, D4, D5, D6, D7);
 LiquidCrystal lcd(40,41,42,43,44,45);
@@ -112,8 +113,8 @@ void setup()
   //ini pinmode lampu LED
   pinMode(53, OUTPUT);
   
-  //ini pinmode pompa
-  pinMode(A0, OUTPUT);
+//  ini pinmode pompa
+//  pinMode(A0, OUTPUT);
 
 
   //pin modenya untuk sound
@@ -149,6 +150,8 @@ void setup()
 
   //setting sound
   sensor=digitalRead(sound);
+  
+  //setting button
   buttonState=digitalRead(button);
 
 

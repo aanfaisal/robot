@@ -1,7 +1,7 @@
 void algoritma(){
 
-//      if(sensor < 500)
-//      {
+      if(sensor < 500 || buttonState == HIGH)
+      {
 //        if(buttonState == HIGH)
 //        {
           if(cm0 <= 6)
@@ -31,6 +31,6 @@ void algoritma(){
               {
                 maju();
               }
-//        }
+        }
 //     }
 }
