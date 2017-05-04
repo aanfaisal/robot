@@ -44,11 +44,11 @@ void tampil(){
    pulse4=pulseIn(echo_pin4,HIGH);
    cm4=pulse4/58.138; 
   
-   kondisi1=analogRead(flame1);
-   kondisi2=analogRead(flame2);
-   kondisi3=analogRead(flame3);
-   kondisi4=analogRead(flame4);
-   kondisi5=analogRead(flame5); 
+   disi[0]=digitalRead(api1);
+   disi[1]=digitalRead(api2);
+   disi[2]=digitalRead(api3);
+   disi[3]=digitalRead(api4);
+   disi[4]=digitalRead(api5); 
   
     lcd.setCursor(0,0);
     lcd.print(cm0);//
@@ -63,15 +63,15 @@ void tampil(){
   
   //set cursor tampilan flame
     lcd.setCursor(0,1);
-    lcd.print(kondisi1);
+    lcd.print(disi[0]);
     lcd.setCursor(3,1);
-    lcd.print(kondisi2);  
+    lcd.print(disi[1]);  
     lcd.setCursor(6,1);
-    lcd.print(kondisi3);  
+    lcd.print(disi[2]);  
     lcd.setCursor(9,1);
-    lcd.print(kondisi4);   
+    lcd.print(disi[3]);   
     lcd.setCursor(12,1);
-    lcd.print(kondisi5);
+    lcd.print(disi[4]);
     
   //set tampilan sound
     lcd.setCursor(14,1);

@@ -1,6 +1,6 @@
 void algoritma(){
 
-      if(sensor < 500 || buttonState == HIGH)
+      if(sensor>=200||buttonState==HIGH)
       {
 //        if(buttonState == HIGH)
 //        {

@@ -3,7 +3,7 @@
 #include <Adafruit_PWMServoDriver.h>
 #include <LiquidCrystal.h>
 
-//Ini servo driver (defaults to addr 0x41)
+//Ini servo driver (defaults to addr 0x40)
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x41);
 
 #define MIN_PULSE_WIDTH       771
@@ -50,20 +50,21 @@ uint8_t motor = 8;
 // Ini variabel sound dan flame
 const int sound = 7;
 
-const int flame1 = A11;
-const int flame2 = A12;
-const int flame3 = A13; //flame tengah
-const int flame4 = A14;
-const int flame5 = A15;
+//sensor flame
+const int api1 = 11;
+const int api2 = 12;
+const int api3 = 13; //flame tengah
+const int api4 = 14;
+const int api5 = 15;
 
-//kondisi flame
+//set kondisi default flame LOW
 int kondisi1 = 0;
 int kondisi2 = 0;
 int kondisi3 = 0;
 int kondisi4 = 0;
 int kondisi5 = 0;
 
-//button
+//button digital
 int button = 52;
 
 // variables will change:
@@ -92,6 +93,8 @@ int pulse,cm0,pulse1,cm1,pulse2,cm2,pulse3,cm3,pulse4,cm4;
 int i;
 int sensor;
 
+int disi[4];
+
 
 void setup() 
 {
@@ -99,12 +102,18 @@ void setup()
   
 
   //pinmode flame
-  pinMode(A11, INPUT);
-  pinMode(A12, INPUT);
-  pinMode(A13, INPUT);
-  pinMode(A14, INPUT);
-  pinMode(A15, INPUT);
+  pinMode(11, INPUT);
+  pinMode(12, INPUT);
+  pinMode(13, INPUT);
+  pinMode(14, INPUT);
+  pinMode(15, INPUT);
 
+  //pin modenya untuk sound
+  pinMode(7, INPUT);
+
+  //ini pinmode button
+  pinMode(52, INPUT);
+  
   //Ini pinmode untuk Sensor garis
   pinMode(A4, INPUT);
   pinMode(A5, INPUT);
@@ -113,15 +122,9 @@ void setup()
   //ini pinmode lampu LED
   pinMode(53, OUTPUT);
   
-//  ini pinmode pompa
-//  pinMode(A0, OUTPUT);
+  //  ini pinmode pompa
+  //  pinMode(A0, OUTPUT);
 
-
-  //pin modenya untuk sound
-  pinMode(7, INPUT);
-
-  //ini pinmode button
-  pinMode(button, INPUT);
   
   //Ini pinmode untuk Sensor jarak
   pinMode(trig_pin, OUTPUT);
@@ -139,8 +142,6 @@ void setup()
   lcd.begin(16, 2);
   lcd.setCursor(0,0); //baris atas
   lcd.print("9 BINTANG");
-
-  lcd.begin(16, 2);
   lcd.setCursor(0,1); //baris bawah
   lcd.print("BISMILLAH");
   
