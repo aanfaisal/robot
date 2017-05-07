@@ -105,11 +105,11 @@ void setup()
   
 
   //pinmode flame
-  pinMode(11, INPUT);
-  pinMode(12, INPUT);
-  pinMode(13, INPUT);
-  pinMode(14, INPUT);
-  pinMode(15, INPUT);
+  pinMode(46, INPUT);
+  pinMode(47, INPUT);
+  pinMode(48, INPUT);
+  pinMode(49, INPUT);
+  pinMode(50, INPUT);
 
   //pin modenya untuk sound
   pinMode(A15, INPUT);
@@ -221,10 +221,109 @@ void loop(){
 //              }
 //    }
 
-     if(analogRead(sound) >= 280 || buttonState==HIGH){algoritma();
-            if((kondisi1==HIGH)||(kondisi2==HIGH)||(kondisi3==HIGH)||(kondisi4==HIGH)||(kondisi5==HIGH)){api();
-                if((kondisi1==LOW)||(kondisi2==LOW)||(kondisi3==LOW)||(kondisi4==LOW)||(kondisi5==LOW)){algoritma();}}}
-                  if(gris1==HIGH||gris2==HIGH){standby1();
-                     if(gris1==LOW||gris2==LOW){algoritma();}}
+//     if(analogRead(sound) >= 280 || buttonState==HIGH){algoritma();
+//            if((kondisi1==HIGH)||(kondisi2==HIGH)||(kondisi3==HIGH)||(kondisi4==HIGH)||(kondisi5==HIGH)){api();
+//                if((kondisi1==LOW)||(kondisi2==LOW)||(kondisi3==LOW)||(kondisi4==LOW)||(kondisi5==LOW)){algoritma();}}}
+//                  if(gris1==HIGH||gris2==HIGH){standby1();
+//                     if(gris1==LOW||gris2==LOW){algoritma();}}
 //   algoritma();
+
+      //program versi 3
+        if(analogRead(sound) >= 280 || buttonState==HIGH)
+        {F = 1;}
+        else if(gris1>=500 && gris2>=500)
+        {F = 2;}
+        else if(gris1<=250 && gris2<=250)
+        {F = 3;}
+        else if(gris1==LOW||gris2==LOW)
+        {F = 4;}
+        else if((kondisi1==LOW)&&(kondisi2==LOW)&&(kondisi3==LOW)&&(kondisi4==LOW)&&(kondisi5==LOW))
+        {F = 5;}
+        else if((kondisi1==LOW)||(kondisi2==LOW)||(kondisi3==LOW)||(kondisi4==LOW)||(kondisi5==LOW))
+        {F = 6;}
+        else
+        {F = 0;}
+        
+        switch (F)
+        { case 1 : label : digitalWrite(7, LOW);
+                   digitalWrite(2, HIGH);
+                   if(digitalRead(api5) == 1)
+                   {digitalWrite(2,LOW);
+                   break;}
+                   else if(digitalRead(api5) == 1)
+                   {digitalWrite(2,LOW);
+                   break;}
+                   else if(digitalRead(api4) == 1)
+                   {break;}
+                   else
+                   {goto label;}
+          break;
+          case 2 : label2 : digitalWrite(7, LOW);
+                   digitalWrite(3, HIGH);
+                   if (digitalRead(api1) == 1)
+                   {digitalWrite(3,LOW);
+                   break;}
+                   else if(digitalRead(api3) == 1)
+                   {digitalWrite(3,LOW);
+                   break;}
+                   else if(digitalRead(api4) == 1)
+                   {break;}
+                   else
+                   {goto label2;}
+          break;
+          case 3 : label3 : digitalWrite(7, LOW);
+                   digitalWrite(4, HIGH);
+                   if(digitalRead(api2) == 1)
+                   {digitalWrite(4,LOW);
+                   break;}
+                   else if(digitalRead(api4) == 1)
+                   {digitalWrite(4,LOW);
+                   break;}
+                   else if(digitalRead(api4) == 1)
+                   {break;}
+                   else
+                   {goto label3;}
+          break;
+          case 4 : label5 :digitalWrite(7, LOW);
+                   digitalWrite(5, HIGH);
+                   if(digitalRead(api3) == 1)
+                   {digitalWrite(5,LOW);
+                   break;}
+                   else if(digitalRead(api5) == 1)
+                   {digitalWrite(5,LOW);
+                   break;}
+                   else if(digitalRead(api4) == 1)
+                   {break;}
+                   else
+                   {goto label5;}
+          break;
+          case 5 : label6: digitalWrite(7, LOW);
+                   digitalWrite(6, HIGH);
+                   if(digitalRead(api4) == 1)
+                   {digitalWrite(6,LOW);
+                   break;}
+                   else if(digitalRead(api4) == 1)
+                   {break;}
+                   else if(digitalRead(api1) == 1)
+                   {digitalWrite(6,LOW);
+                   goto label;}
+                   else
+                   {goto label6;}
+          break;
+          case 6 :  digitalWrite(7, HIGH);
+                    digitalWrite(2, LOW);
+                    digitalWrite(3, LOW);
+                    digitalWrite(4, LOW);
+                    digitalWrite(5, LOW);
+                    digitalWrite(6, LOW);
+         break;
+          
+         default :  digitalWrite(7, HIGH);
+                    digitalWrite(2, LOW);
+                    digitalWrite(3, LOW);
+                    digitalWrite(4, LOW);
+                    digitalWrite(5, LOW);
+                    digitalWrite(6, LOW);
+          break;
+      }
 }
