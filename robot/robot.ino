@@ -12,88 +12,91 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x41);
 #define FREQUENCY             50
 #define SPEED                 300
 
-int d = 150; //delay servo bawah
+  int d = 150; //delay servo bawah
+  
+  //ini sensor2 jarak ultrasonik
+  //sensorjarak kiri
+  int trig_pin=15;
+  int echo_pin=14;
+  //sensorjarak serong kiri
+  int trig_pin1=36;
+  int echo_pin1=37;
+  //sensorjarak tengah
+  int trig_pin2=30;
+  int echo_pin2=31;
+  //sensorjarak serong kanan
+  int trig_pin3=23;
+  int echo_pin3=22;
+  //sensorjarak kanan
+  int trig_pin4=10;
+  int echo_pin4=11;
+  
+  
+  //Servo 1~8
+  // Kaki Servonya dikasih 
+  uint8_t kakiA1 = 0;
+  uint8_t kakiA2 = 1;
+  uint8_t kakiB1 = 12;
+  uint8_t kakiB2 = 13;
+  uint8_t kakiC1 = 14;
+  uint8_t kakiC2 = 15;
+  uint8_t kakiD1 = 2;
+  uint8_t kakiD2 = 3;
+  
+  //ini motor
+  uint8_t motor = 8;
+                    
+  
+  // Ini variabel sound dan flame
+  const int sound = A15;
 
-//ini sensor2 jarak ultrasonik
-//sensorjarak kiri
-int trig_pin=15;
-int echo_pin=14;
-//sensorjarak serong kiri
-int trig_pin1=36;
-int echo_pin1=37;
-//sensorjarak tengah
-int trig_pin2=30;
-int echo_pin2=31;
-//sensorjarak serong kanan
-int trig_pin3=23;
-int echo_pin3=22;
-//sensorjarak kanan
-int trig_pin4=10;
-int echo_pin4=11;
+  
+  boolean SensorState = false; 
+  
+  //sensor flame
+  const int api1 = 11;
+  const int api2 = 12;
+  const int api3 = 13; //flame tengah
+  const int api4 = 14;
+  const int api5 = 15;
+  
+  //set kondisi default flame LOW
+  int kondisi1 = 0;
+  int kondisi2 = 0;
+  int kondisi3 = 0;
+  int kondisi4 = 0;
+  int kondisi5 = 0;
+  
+  //button digital
+  int button = 52;
+  
+  // variables will change:
+  int buttonState = 0;         // variable for reading the pushbutton status
 
+  //ini lampu led merah
+  int led = 53;
 
-//Servo 1~8
-// Kaki Servonya dikasih 
-uint8_t kakiA1 = 0;
-uint8_t kakiA2 = 1;
-uint8_t kakiB1 = 12;
-uint8_t kakiB2 = 13;
-uint8_t kakiC1 = 14;
-uint8_t kakiC2 = 15;
-uint8_t kakiD1 = 2;
-uint8_t kakiD2 = 3;
+  //Ini variabel Sensor Garis
+  int garis1 = A4;
+  int garis2 = A5;
+  int garis3 = A6;
+  
+  int gris1=0;
+  int gris2=0;
+  int gris3=0;
+  
+  //Ini variabel Pompa Air
+  //int pompa = A0;
 
-//ini motor
-uint8_t motor = 8;
-                  
+    //LiquidCrystal lcd(RS, E, D4, D5, D6, D7);
+    LiquidCrystal lcd(40,41,42,43,44,45);
 
-// Ini variabel sound dan flame
-const int sound = 7;
-
-//sensor flame
-const int api1 = 11;
-const int api2 = 12;
-const int api3 = 13; //flame tengah
-const int api4 = 14;
-const int api5 = 15;
-
-//set kondisi default flame LOW
-int kondisi1 = 0;
-int kondisi2 = 0;
-int kondisi3 = 0;
-int kondisi4 = 0;
-int kondisi5 = 0;
-
-//button digital
-int button = 52;
-
-// variables will change:
-int buttonState = 0;         // variable for reading the pushbutton status
-
-//ini lampu led merah
-int led = 53;
-
-//Ini variabel Sensor Garis
-int garis1 = A4;
-int garis2 = A5;
-int garis3 = A6;
-
-int gris1=0;
-int gris2=0;
-int gris3=0;
-
-//Ini variabel Pompa Air
-//int pompa = A0;
-
-//LiquidCrystal lcd(RS, E, D4, D5, D6, D7);
-LiquidCrystal lcd(40,41,42,43,44,45);
-
-//Ini variabel sensor jarak
-int pulse,cm0,pulse1,cm1,pulse2,cm2,pulse3,cm3,pulse4,cm4;
-int i;
-int sensor;
-
-int disi[4];
+  //Ini variabel sensor jarak
+  int pulse,cm0,pulse1,cm1,pulse2,cm2,pulse3,cm3,pulse4,cm4;
+  int i;
+  int sensor;
+  int F;
+  int disi[4];
 
 
 void setup() 
@@ -109,7 +112,7 @@ void setup()
   pinMode(15, INPUT);
 
   //pin modenya untuk sound
-  pinMode(7, INPUT);
+  pinMode(A15, INPUT);
 
   //ini pinmode button
   pinMode(52, INPUT);
@@ -141,7 +144,9 @@ void setup()
   //Nge Set LCD tu begini
   lcd.begin(16, 2);
   lcd.setCursor(0,0); //baris atas
-  lcd.print("9 BINTANG");
+  lcd.print("BINTANG");
+
+  lcd.begin(16, 2);
   lcd.setCursor(0,1); //baris bawah
   lcd.print("BISMILLAH");
   
@@ -150,10 +155,22 @@ void setup()
   pwm.setPWMFreq(FREQUENCY);
 
   //setting sound
-  sensor=digitalRead(sound);
+  sensor=analogRead(sound);
   
   //setting button
   buttonState=digitalRead(button);
+
+  //setting api
+   kondisi1=digitalRead(api1);
+   kondisi2=digitalRead(api2);
+   kondisi3=digitalRead(api3);
+   kondisi4=digitalRead(api4);
+   kondisi5=digitalRead(api5); 
+
+  //setting garis
+  gris1=analogRead(garis1);
+  gris2=analogRead(garis2);
+  gris3=analogRead(garis3);
 
 
 }
@@ -171,6 +188,43 @@ int pulseWidth(int angle)
 
 void loop(){
   
- algoritma();
+//    if (analogRead(sound) >= 280 || buttonState == HIGH){
+    
+  //  delay(100);
 
+//       if(cm0 <= 6)
+//              {
+//                hindar_kiri();
+//              }
+//            else if(cm4 <=10)
+//              {
+//                hindar_kanan();
+//                hindar_kanan();
+//              }
+//            else if(cm1 <= 20)
+//              {
+//                kanan();
+//                kanan();      
+//              }
+//            else if(cm3 <= 20)
+//              {
+//                kiri();
+//                kiri();
+//              }
+//              else if(cm2 <= 18)
+//              {
+//                mundur();  
+//              }
+//            else  
+//              {
+//                maju();
+//              }
+//    }
+
+     if(analogRead(sound) >= 280 || buttonState==HIGH){algoritma();
+            if((kondisi1==HIGH)||(kondisi2==HIGH)||(kondisi3==HIGH)||(kondisi4==HIGH)||(kondisi5==HIGH)){api();
+                if((kondisi1==LOW)||(kondisi2==LOW)||(kondisi3==LOW)||(kondisi4==LOW)||(kondisi5==LOW)){algoritma();}}}
+                  if(gris1==HIGH||gris2==HIGH){standby1();
+                     if(gris1==LOW||gris2==LOW){algoritma();}}
+//   algoritma();
 }
