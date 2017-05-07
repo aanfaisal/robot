@@ -235,7 +235,7 @@ void loop(){
         {F = 2;}
         else if(gris1<=250 && gris2<=250)
         {F = 3;}
-        else if(gris1==LOW||gris2==LOW)
+        else if()
         {F = 4;}
         else if((kondisi1==LOW)&&(kondisi2==LOW)&&(kondisi3==LOW)&&(kondisi4==LOW)&&(kondisi5==LOW))
         {F = 5;}
