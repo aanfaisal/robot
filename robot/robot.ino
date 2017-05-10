@@ -12,40 +12,40 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x41);
 #define FREQUENCY             50
 #define SPEED                 300
 
-  int d = 150; //delay servo bawah
+int d = 150; //delay servo bawah
   
-  //ini sensor2 jarak ultrasonik
-  //sensorjarak kiri
-  int trig_pin=15;
-  int echo_pin=14;
-  //sensorjarak serong kiri
-  int trig_pin1=36;
-  int echo_pin1=37;
-  //sensorjarak tengah
-  int trig_pin2=30;
-  int echo_pin2=31;
-  //sensorjarak serong kanan
-  int trig_pin3=23;
-  int echo_pin3=22;
-  //sensorjarak kanan
-  int trig_pin4=10;
-  int echo_pin4=11;
+//ini sensor2 jarak ultrasonik
+//sensorjarak kiri
+int trig_pin=15;
+int echo_pin=14;
+//sensorjarak serong kiri
+int trig_pin1=36;
+int echo_pin1=37;
+//sensorjarak tengah
+int trig_pin2=30;
+int echo_pin2=31;
+//sensorjarak serong kanan
+int trig_pin3=23;
+int echo_pin3=22;
+//sensorjarak kanan
+int trig_pin4=10;
+int echo_pin4=11;
   
   
-  //Servo 1~8
-  // Kaki Servonya dikasih 
-  uint8_t kakiA1 = 0;
-  uint8_t kakiA2 = 1;
-  uint8_t kakiB1 = 12;
-  uint8_t kakiB2 = 13;
-  uint8_t kakiC1 = 14;
-  uint8_t kakiC2 = 15;
-  uint8_t kakiD1 = 2;
-  uint8_t kakiD2 = 3;
-  
-  //ini motor
-  uint8_t motor = 8;
-                    
+//Servo 1~8
+// Kaki Servonya dikasih 
+uint8_t kakiA1 = 0;
+uint8_t kakiA2 = 1;
+uint8_t kakiB1 = 12;
+uint8_t kakiB2 = 13;
+uint8_t kakiC1 = 14;
+uint8_t kakiC2 = 15;
+uint8_t kakiD1 = 2;
+uint8_t kakiD2 = 3;
+
+//ini motor
+uint8_t motor = 8;
+                  
   
   // Ini variabel sound dan flame
   const int sound = A15;
@@ -227,95 +227,59 @@ void loop(){
 //                  if(gris1==HIGH||gris2==HIGH){standby1();
 //                     if(gris1==LOW||gris2==LOW){algoritma();}}
 //   algoritma();
-
+ 
       //program versi 3
-        if(analogRead(sound) >= 280 || buttonState==HIGH)
+        if(analogRead(sound) >= 280)
         {F = 1;}
-        else if(gris1>=500 && gris2>=500)
+        else if(buttonState==HIGH)
         {F = 2;}
-        else if(gris1<=250 && gris2<=250)
+        else if(gris1>=500 && gris2>=500)
         {F = 3;}
-        else if()
+        else if(gris1<=250 && gris2<=250)
         {F = 4;}
         else if((kondisi1==LOW)&&(kondisi2==LOW)&&(kondisi3==LOW)&&(kondisi4==LOW)&&(kondisi5==LOW))
         {F = 5;}
-        else if((kondisi1==LOW)||(kondisi2==LOW)||(kondisi3==LOW)||(kondisi4==LOW)||(kondisi5==LOW))
+        else if((kondisi1==LOW)||(kondisi2==HIGH)||(kondisi3==HIGH)||(kondisi4==HIGH)||(kondisi5==LOW))
         {F = 6;}
         else
         {F = 0;}
         
         switch (F)
-        { case 1 : label : digitalWrite(7, LOW);
-                   digitalWrite(2, HIGH);
-                   if(digitalRead(api5) == 1)
-                   {digitalWrite(2,LOW);
-                   break;}
-                   else if(digitalRead(api5) == 1)
-                   {digitalWrite(2,LOW);
-                   break;}
-                   else if(digitalRead(api4) == 1)
-                   {break;}
-                   else
+        { case 1 : label : delay(10);algoritma();
+                   
                    {goto label;}
           break;
-          case 2 : label2 : digitalWrite(7, LOW);
-                   digitalWrite(3, HIGH);
-                   if (digitalRead(api1) == 1)
-                   {digitalWrite(3,LOW);
-                   break;}
-                   else if(digitalRead(api3) == 1)
-                   {digitalWrite(3,LOW);
-                   break;}
-                   else if(digitalRead(api4) == 1)
-                   {break;}
-                   else
+          case 2 : label2 : delay(10);algoritma();
+                   
                    {goto label2;}
           break;
-          case 3 : label3 : digitalWrite(7, LOW);
-                   digitalWrite(4, HIGH);
-                   if(digitalRead(api2) == 1)
-                   {digitalWrite(4,LOW);
+          case 3 : label3 : 
+                   if(gris1>=500 && gris2>=500)
+                   {algoritma();
                    break;}
-                   else if(digitalRead(api4) == 1)
-                   {digitalWrite(4,LOW);
+                   else if(gris1<=250 && gris2<=250)
+                   {delay(50);algoritma();
                    break;}
-                   else if(digitalRead(api4) == 1)
-                   {break;}
                    else
                    {goto label3;}
           break;
-          case 4 : label5 :digitalWrite(7, LOW);
-                   digitalWrite(5, HIGH);
-                   if(digitalRead(api3) == 1)
-                   {digitalWrite(5,LOW);
+          case 4 : label5 :
+                   if(gris1<=250 && gris2<=250)
+                   {maju();delay(100);
                    break;}
-                   else if(digitalRead(api5) == 1)
-                   {digitalWrite(5,LOW);
+                   else if(gris1>=500 && gris2>=500)
+                   {delay(10);algoritma();
                    break;}
-                   else if(digitalRead(api4) == 1)
-                   {break;}
                    else
                    {goto label5;}
           break;
-          case 5 : label6: digitalWrite(7, LOW);
-                   digitalWrite(6, HIGH);
-                   if(digitalRead(api4) == 1)
-                   {digitalWrite(6,LOW);
-                   break;}
-                   else if(digitalRead(api4) == 1)
-                   {break;}
-                   else if(digitalRead(api1) == 1)
-                   {digitalWrite(6,LOW);
-                   goto label;}
-                   else
+          case 5 : label6: delay(10);algoritma();
+          
                    {goto label6;}
           break;
-          case 6 :  digitalWrite(7, HIGH);
-                    digitalWrite(2, LOW);
-                    digitalWrite(3, LOW);
-                    digitalWrite(4, LOW);
-                    digitalWrite(5, LOW);
-                    digitalWrite(6, LOW);
+          case 6 :  label7: delay(10);api();
+          
+                   {goto label7;}
          break;
           
          default :  digitalWrite(7, HIGH);
