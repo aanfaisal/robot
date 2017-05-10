@@ -42,11 +42,11 @@ void api(){
 
 void garis(){
 
-    if(gris1 == HIGH || gris2 == HIGH || gris3==HIGH)
+    if(gris1 == HIGH || gris2 == HIGH)
     {
         //loop();
     }
-    else if(gris1 == HIGH || gris2 == LOW || gris3==HIGH)
+    else if(gris1 == HIGH || gris2 == LOW)
     {
        // stanby2();
     }

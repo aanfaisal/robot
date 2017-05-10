@@ -1,7 +1,7 @@
-#include <SoftwareSerial.h>
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 #include <LiquidCrystal.h>
+//#include <SoftwareSerial.h>
 
 //Ini servo driver (defaults to addr 0x40)
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x41);
@@ -43,91 +43,83 @@ uint8_t kakiC2 = 15;
 uint8_t kakiD1 = 2;
 uint8_t kakiD2 = 3;
 
-//ini motor
-uint8_t motor = 8;
+//ini motor pompa
+int motor = 8;
                   
   
-  // Ini variabel sound dan flame
-  const int sound = A15;
+// Ini variabel sound dan flame
+int sound = A7;
+int sensor = 0;
 
+//button digital
+int button = 52;
+// variables will change:
+int buttonState = 0;         // variable for reading the pushbutton status
   
-  boolean SensorState = false; 
-  
-  //sensor flame
-  const int api1 = 11;
-  const int api2 = 12;
-  const int api3 = 13; //flame tengah
-  const int api4 = 14;
-  const int api5 = 15;
-  
-  //set kondisi default flame LOW
-  int kondisi1 = 0;
-  int kondisi2 = 0;
-  int kondisi3 = 0;
-  int kondisi4 = 0;
-  int kondisi5 = 0;
-  
-  //button digital
-  int button = 52;
-  
-  // variables will change:
-  int buttonState = 0;         // variable for reading the pushbutton status
+//sensor flame
+const int api1 = 11;
+const int api2 = 12;
+const int api3 = 13; //flame tengah
+const int api4 = 14;
+const int api5 = 15;
 
-  //ini lampu led merah
-  int led = 53;
+//set kondisi default flame LOW
+int kondisi1 = 0;
+int kondisi2 = 0;
+int kondisi3 = 0;
+int kondisi4 = 0;
+int kondisi5 = 0;
 
-  //Ini variabel Sensor Garis
-  int garis1 = A4;
-  int garis2 = A5;
-  int garis3 = A6;
-  
-  int gris1=0;
-  int gris2=0;
-  int gris3=0;
-  
-  //Ini variabel Pompa Air
-  //int pompa = A0;
 
-    //LiquidCrystal lcd(RS, E, D4, D5, D6, D7);
-    LiquidCrystal lcd(40,41,42,43,44,45);
+//ini lampu led merah
+int led = 53;
 
-  //Ini variabel sensor jarak
-  int pulse,cm0,pulse1,cm1,pulse2,cm2,pulse3,cm3,pulse4,cm4;
-  int i;
-  int sensor;
-  int F;
-  int disi[4];
+//Ini variabel Sensor Garis
+int garis1 = A4;
+int garis2 = A5;
+//line state sensor
+int gris1=0;
+int gris2=0;
+
+//Ini variabel Pompa Air
+//int pompa = A0;
+
+//LiquidCrystal lcd(RS, E, D4, D5, D6, D7);
+LiquidCrystal lcd(40,41,42,43,44,45);
+
+
+//Ini variabel sensor jarak
+int pulse,cm0,pulse1,cm1,pulse2,cm2,pulse3,cm3,pulse4,cm4;
+int i;
+int F;
+int disi[4];
 
 
 void setup() 
 {
+
   Serial.begin(9600);
   
-
   //pinmode flame
-  pinMode(46, INPUT);
-  pinMode(47, INPUT);
-  pinMode(48, INPUT);
-  pinMode(49, INPUT);
-  pinMode(50, INPUT);
+  pinMode(api1, INPUT);
+  pinMode(api2, INPUT);
+  pinMode(api3, INPUT);
+  pinMode(api4, INPUT);
+  pinMode(api5, INPUT);
 
   //pin modenya untuk sound
-  pinMode(A15, INPUT);
+  pinMode(sound, INPUT);
 
   //ini pinmode button
-  pinMode(52, INPUT);
+  pinMode(button, INPUT);
   
   //Ini pinmode untuk Sensor garis
-  pinMode(A4, INPUT);
-  pinMode(A5, INPUT);
-  pinMode(A6, INPUT);
+  pinMode(garis1, INPUT);
+  pinMode(garis2, INPUT);
 
   //ini pinmode lampu LED
-  pinMode(53, OUTPUT);
+  pinMode(led, OUTPUT);
   
-  //  ini pinmode pompa
-  //  pinMode(A0, OUTPUT);
-
   
   //Ini pinmode untuk Sensor jarak
   pinMode(trig_pin, OUTPUT);
@@ -143,35 +135,16 @@ void setup()
 
   //Nge Set LCD tu begini
   lcd.begin(16, 2);
-  lcd.setCursor(0,0); //baris atas
-  lcd.print("BINTANG");
-
-  lcd.begin(16, 2);
-  lcd.setCursor(0,1); //baris bawah
+  lcd.setCursor(3,0); //baris bawah
   lcd.print("BISMILLAH");
+
+  //lcd.begin(16, 2);
+  //lcd.setCursor(0,0); //baris atas
+  //lcd.print("BINTANG");
   
   //Setting PWM  
   pwm.begin();
   pwm.setPWMFreq(FREQUENCY);
-
-  //setting sound
-  sensor=analogRead(sound);
-  
-  //setting button
-  buttonState=digitalRead(button);
-
-  //setting api
-   kondisi1=digitalRead(api1);
-   kondisi2=digitalRead(api2);
-   kondisi3=digitalRead(api3);
-   kondisi4=digitalRead(api4);
-   kondisi5=digitalRead(api5); 
-
-  //setting garis
-  gris1=analogRead(garis1);
-  gris2=analogRead(garis2);
-  gris3=analogRead(garis3);
-
 
 }
 
@@ -187,107 +160,79 @@ int pulseWidth(int angle)
 
 
 void loop(){
-  
-//    if (analogRead(sound) >= 280 || buttonState == HIGH){
-    
-  //  delay(100);
+    baca();
 
-//       if(cm0 <= 6)
-//              {
-//                hindar_kiri();
-//              }
-//            else if(cm4 <=10)
-//              {
-//                hindar_kanan();
-//                hindar_kanan();
-//              }
-//            else if(cm1 <= 20)
-//              {
-//                kanan();
-//                kanan();      
-//              }
-//            else if(cm3 <= 20)
-//              {
-//                kiri();
-//                kiri();
-//              }
-//              else if(cm2 <= 18)
-//              {
-//                mundur();  
-//              }
-//            else  
-//              {
-//                maju();
-//              }
-//    }
+    Serial.print("nomer 0 = ");
+    Serial.println(sensor);
+    delay(1000);
 
+}
 //     if(analogRead(sound) >= 280 || buttonState==HIGH){algoritma();
 //            if((kondisi1==HIGH)||(kondisi2==HIGH)||(kondisi3==HIGH)||(kondisi4==HIGH)||(kondisi5==HIGH)){api();
 //                if((kondisi1==LOW)||(kondisi2==LOW)||(kondisi3==LOW)||(kondisi4==LOW)||(kondisi5==LOW)){algoritma();}}}
 //                  if(gris1==HIGH||gris2==HIGH){standby1();
 //                     if(gris1==LOW||gris2==LOW){algoritma();}}
 //   algoritma();
- 
-      //program versi 3
-        if(analogRead(sound) >= 280)
-        {F = 1;}
-        else if(buttonState==HIGH)
-        {F = 2;}
-        else if(gris1>=500 && gris2>=500)
-        {F = 3;}
-        else if(gris1<=250 && gris2<=250)
-        {F = 4;}
-        else if((kondisi1==LOW)&&(kondisi2==LOW)&&(kondisi3==LOW)&&(kondisi4==LOW)&&(kondisi5==LOW))
-        {F = 5;}
-        else if((kondisi1==LOW)||(kondisi2==HIGH)||(kondisi3==HIGH)||(kondisi4==HIGH)||(kondisi5==LOW))
-        {F = 6;}
-        else
-        {F = 0;}
-        
-        switch (F)
-        { case 1 : label : delay(10);algoritma();
-                   
-                   {goto label;}
-          break;
-          case 2 : label2 : delay(10);algoritma();
-                   
-                   {goto label2;}
-          break;
-          case 3 : label3 : 
-                   if(gris1>=500 && gris2>=500)
-                   {algoritma();
-                   break;}
-                   else if(gris1<=250 && gris2<=250)
-                   {delay(50);algoritma();
-                   break;}
-                   else
-                   {goto label3;}
-          break;
-          case 4 : label5 :
-                   if(gris1<=250 && gris2<=250)
-                   {maju();delay(100);
-                   break;}
-                   else if(gris1>=500 && gris2>=500)
-                   {delay(10);algoritma();
-                   break;}
-                   else
-                   {goto label5;}
-          break;
-          case 5 : label6: delay(10);algoritma();
-          
-                   {goto label6;}
-          break;
-          case 6 :  label7: delay(10);api();
-          
-                   {goto label7;}
-         break;
-          
-         default :  digitalWrite(7, HIGH);
-                    digitalWrite(2, LOW);
-                    digitalWrite(3, LOW);
-                    digitalWrite(4, LOW);
-                    digitalWrite(5, LOW);
-                    digitalWrite(6, LOW);
-          break;
-      }
-}
+
+//      //program versi 3
+//        if(analogRead(sensor) >= 50)
+//        {F = 1;}
+//        else if(buttonState==HIGH)
+//        {F = 2;}
+//        else if(gris1>=500 && gris2>=500)
+//        {F = 3;}
+//        else if(gris1<=250 && gris2<=250)
+//        {F = 4;}
+//        else if((kondisi1==LOW)&&(kondisi2==LOW)&&(kondisi3==LOW)&&(kondisi4==LOW)&&(kondisi5==LOW))
+//        {F = 5;}
+//        else if((kondisi1==LOW)||(kondisi2==HIGH)||(kondisi3==HIGH)||(kondisi4==HIGH)||(kondisi5==LOW))
+//        {F = 6;}
+//        else
+//        {F = 0;}
+//        
+//        switch (F)
+//        { case 1 : label : delay(10);algoritma();
+//                   
+//                   {goto label;}
+//          break;
+//          case 2 : label2 : delay(10);algoritma();
+//                   
+//                   {goto label2;}
+//          break;
+//          case 3 : label3 : 
+//                   if(gris1>=500 && gris2>=500)
+//                   {algoritma();
+//                   break;}
+//                   else if(gris1<=250 && gris2<=250)
+//                   {delay(50);algoritma();
+//                   break;}
+//                   else
+//                   {goto label3;}
+//          break;
+//          case 4 : label5 :
+//                   if(gris1<=250 && gris2<=250)
+//                   {maju();delay(100);
+//                   break;}
+//                   else if(gris1>=500 && gris2>=500)
+//                   {delay(10);algoritma();
+//                   break;}
+//                   else
+//                   {goto label5;}
+//          break;
+//          case 5 : label6: delay(10);algoritma();
+//          
+//                   {goto label6;}
+//          break;
+//          case 6 :  label7: delay(10);api();
+//          
+//                   {goto label7;}
+//         break;
+//          
+//         default :  digitalWrite(7, HIGH);
+//                    digitalWrite(2, LOW);
+//                    digitalWrite(3, LOW);
+//                    digitalWrite(4, LOW);
+//                    digitalWrite(5, LOW);
+//                    digitalWrite(6, LOW);
+//          break;
+//      }

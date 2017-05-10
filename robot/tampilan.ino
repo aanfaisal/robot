@@ -1,3 +1,31 @@
+void baca(){
+  
+  //setting sound
+  sensor=analogRead(sound);
+  
+  //setting button
+  buttonState=digitalRead(button);
+  
+  //setting api
+  kondisi1=digitalRead(api1);
+  kondisi2=digitalRead(api2);
+  kondisi3=digitalRead(api3);
+  kondisi4=digitalRead(api4);
+  kondisi5=digitalRead(api5);
+
+  disi[0]=digitalRead(api1);
+  disi[1]=digitalRead(api2);
+  disi[2]=digitalRead(api3);
+  disi[3]=digitalRead(api4);
+  disi[4]=digitalRead(api5); 
+
+  //setting garis
+  gris1=analogRead(garis1);
+  gris2=analogRead(garis2);
+
+
+}
+
 void tampil(){
   //sensor 1 
    digitalWrite(trig_pin,LOW);
@@ -44,12 +72,7 @@ void tampil(){
    pulse4=pulseIn(echo_pin4,HIGH);
    cm4=pulse4/58.138; 
   
-   disi[0]=digitalRead(api1);
-   disi[1]=digitalRead(api2);
-   disi[2]=digitalRead(api3);
-   disi[3]=digitalRead(api4);
-   disi[4]=digitalRead(api5); 
-  
+
     lcd.setCursor(0,0);
     lcd.print(cm0);//
     lcd.setCursor(3,0);
@@ -73,9 +96,6 @@ void tampil(){
     lcd.setCursor(12,1);
     lcd.print(disi[4]);
     
-  //set tampilan sound
-    lcd.setCursor(14,1);
-    lcd.print(sensor);
     
     delay(100);lcd.clear();
 
