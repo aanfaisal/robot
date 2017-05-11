@@ -3,7 +3,7 @@
 #include <LiquidCrystal.h>
 //#include <SoftwareSerial.h>
 
-//Ini servo driver (defaults to addr 0x40)
+//Ini servo driver (defaults to addr 0x41)
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x41);
 
 #define MIN_PULSE_WIDTH       771
@@ -57,11 +57,11 @@ int button = 52;
 int buttonState = 0;         // variable for reading the pushbutton status
   
 //sensor flame
-const int api1 = 11;
-const int api2 = 12;
-const int api3 = 13; //flame tengah
-const int api4 = 14;
-const int api5 = 15;
+ int api1 = 46;
+ int api2 = 47;
+ int api3 = 48; //flame tengah
+ int api4 = 49;
+ int api5 = 50;
 
 //set kondisi default flame LOW
 int kondisi1 = 0;
@@ -160,22 +160,52 @@ int pulseWidth(int angle)
 
 
 void loop(){
-    baca();
+    
+       baca();
+      
+         Serial.print("nomer 0 = ");
+         Serial.println(kondisi1);
+         Serial.print("nomer 1 = ");
+         Serial.println(kondisi2);
+         Serial.print("nomer 2 = ");
+         Serial.println(kondisi3);
+         Serial.print("nomer 3 = ");
+         Serial.println(kondisi4);
+         Serial.print("nomer 4 = ");
+         Serial.println(kondisi5);
 
-    Serial.print("nomer 0 = ");
-    Serial.println(sensor);
-    delay(1000);
+         delay(1000);
 
-}
-//     if(analogRead(sound) >= 280 || buttonState==HIGH){algoritma();
-//            if((kondisi1==HIGH)||(kondisi2==HIGH)||(kondisi3==HIGH)||(kondisi4==HIGH)||(kondisi5==HIGH)){api();
+////    
+//     if(sensor < 200 || buttonState==HIGH){
+//         algoritma();
+//     }
+//     else if(gris1>=500 && gris2>=500){
+//          algoritma();
+//     }
+//     else if(gris1<=250 && gris2<=250){
+//          standby1();
+//     }
+//     else if((kondisi1==LOW)&&(kondisi2==LOW)&&(kondisi3==LOW)&&(kondisi4==LOW)&&(kondisi5==HIGH)){
+//          algoritma();
+//     }
+//     else if((kondisi1==LOW)&&(kondisi2==HIGH)&&(kondisi3==HIGH)&&(kondisi4==HIGH)&&(kondisi5==LOW)){
+//          delay(100);
+//          api();
+//     }
+//    else{
+//        standby1();
+//    }
+//      
+//     if((kondisi1==HIGH)||(kondisi2==HIGH)||(kondisi3==HIGH)||(kondisi4==HIGH)||(kondisi5==HIGH)){api();
 //                if((kondisi1==LOW)||(kondisi2==LOW)||(kondisi3==LOW)||(kondisi4==LOW)||(kondisi5==LOW)){algoritma();}}}
 //                  if(gris1==HIGH||gris2==HIGH){standby1();
 //                     if(gris1==LOW||gris2==LOW){algoritma();}}
-//   algoritma();
-
+//      algoritma();
+//
+//
 //      //program versi 3
-//        if(analogRead(sensor) >= 50)
+//        if(sensor < 380)
 //        {F = 1;}
 //        else if(buttonState==HIGH)
 //        {F = 2;}
@@ -191,14 +221,17 @@ void loop(){
 //        {F = 0;}
 //        
 //        switch (F)
-//        { case 1 : label : delay(10);algoritma();
-//                   
-//                   {goto label;}
+//        { 
+//          case 1 : label : 
+//                          algoritma();
+//                   {goto label;}         
 //          break;
-//          case 2 : label2 : delay(10);algoritma();
+//          
+//          case 2 : label2 : algoritma();
 //                   
 //                   {goto label2;}
 //          break;
+//          
 //          case 3 : label3 : 
 //                   if(gris1>=500 && gris2>=500)
 //                   {algoritma();
@@ -209,6 +242,7 @@ void loop(){
 //                   else
 //                   {goto label3;}
 //          break;
+//          
 //          case 4 : label5 :
 //                   if(gris1<=250 && gris2<=250)
 //                   {maju();delay(100);
@@ -219,20 +253,17 @@ void loop(){
 //                   else
 //                   {goto label5;}
 //          break;
+//          
 //          case 5 : label6: delay(10);algoritma();
 //          
 //                   {goto label6;}
 //          break;
-//          case 6 :  label7: delay(10);api();
-//          
+//          case 6 :  label7: delay(10);
+//                    api();
 //                   {goto label7;}
-//         break;
-//          
-//         default :  digitalWrite(7, HIGH);
-//                    digitalWrite(2, LOW);
-//                    digitalWrite(3, LOW);
-//                    digitalWrite(4, LOW);
-//                    digitalWrite(5, LOW);
-//                    digitalWrite(6, LOW);
+//          break;
+//            
+//          default :  standby1();
 //          break;
 //      }
+}

@@ -23,7 +23,6 @@ void baca(){
   gris1=analogRead(garis1);
   gris2=analogRead(garis2);
 
-
 }
 
 void tampil(){
@@ -95,9 +94,7 @@ void tampil(){
     lcd.print(disi[3]);   
     lcd.setCursor(12,1);
     lcd.print(disi[4]);
-    
-    
-    delay(100);lcd.clear();
-
+        
+    delay(100);
+    lcd.clear();
 }
-

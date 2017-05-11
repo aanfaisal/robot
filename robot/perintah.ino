@@ -2,6 +2,7 @@ void algoritma(){
 
 //        dengan begini robot akan mengikuti wall kanan
 //
+//     if(sensor <= 320 || buttonState==HIGH){
         if(cm0 <= 6)
             {
               hindar_kiri();
@@ -29,4 +30,5 @@ void algoritma(){
             {
               maju();
             }
+//     }
 }
