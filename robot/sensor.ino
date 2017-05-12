@@ -25,6 +25,7 @@ void lamp(){
 }
 
 void api(){
+        lamp();
 
         if( kondisi3==HIGH ){
         analogWrite(motor, HIGH);
@@ -34,7 +35,8 @@ void api(){
         
         else if( kondisi3 == LOW){
 //         pwm.setPWM(motor, 0, pulseWidth(0)); //motor
-            algoritma();
+           // algoritma();
+
             delay(kondisi3);
         }
   

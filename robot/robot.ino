@@ -162,41 +162,39 @@ int pulseWidth(int angle)
 void loop(){
     
        baca();
-      
-         Serial.print("nomer 0 = ");
-         Serial.println(kondisi1);
-         Serial.print("nomer 1 = ");
-         Serial.println(kondisi2);
-         Serial.print("nomer 2 = ");
-         Serial.println(kondisi3);
-         Serial.print("nomer 3 = ");
-         Serial.println(kondisi4);
-         Serial.print("nomer 4 = ");
-         Serial.println(kondisi5);
+       
+       algoritma();
 
-         delay(1000);
+//       api();
+              
+//         Serial.print("nomer 0 = ");
+//         Serial.println(kondisi1);
+//         Serial.print("nomer 1 = ");
+//         Serial.println(kondisi2);
+//         Serial.print("nomer 2 = ");
+//         Serial.println(kondisi3);
+//         Serial.print("nomer 3 = ");
+//         Serial.println(kondisi4);
+//         Serial.print("nomer 4 = ");
+//         Serial.println(kondisi5);
+//
+//         delay(1000);
 
-////    
-//     if(sensor < 200 || buttonState==HIGH){
+    
+//     if(sensor < 300 || buttonState==HIGH){
 //         algoritma();
 //     }
-//     else if(gris1>=500 && gris2>=500){
-//          algoritma();
-//     }
-//     else if(gris1<=250 && gris2<=250){
+//     else if((gris1<=250)&&(gris2<=250)){
 //          standby1();
 //     }
-//     else if((kondisi1==LOW)&&(kondisi2==LOW)&&(kondisi3==LOW)&&(kondisi4==LOW)&&(kondisi5==HIGH)){
-//          algoritma();
-//     }
-//     else if((kondisi1==LOW)&&(kondisi2==HIGH)&&(kondisi3==HIGH)&&(kondisi4==HIGH)&&(kondisi5==LOW)){
+//     else if((kondisi1==0)&&(kondisi2==1)&&(kondisi3==1)&&(kondisi4==1)&&(kondisi5==0)){
 //          delay(100);
 //          api();
 //     }
-//    else{
-//        standby1();
-//    }
-//      
+//     else if((gris1>=500)&&(gris2>=500)&&(kondisi1==0)&&(kondisi2==0)&&(kondisi3==0)&&(kondisi4==0)&&(kondisi5==0)){
+//          algoritma();
+//     }
+     
 //     if((kondisi1==HIGH)||(kondisi2==HIGH)||(kondisi3==HIGH)||(kondisi4==HIGH)||(kondisi5==HIGH)){api();
 //                if((kondisi1==LOW)||(kondisi2==LOW)||(kondisi3==LOW)||(kondisi4==LOW)||(kondisi5==LOW)){algoritma();}}}
 //                  if(gris1==HIGH||gris2==HIGH){standby1();

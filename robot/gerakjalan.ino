@@ -238,6 +238,7 @@ void kanan() {
   pwm.setPWM(kakiB1, 0, pulseWidth(80));
   //mundur C
   pwm.setPWM(kakiC1, 0, pulseWidth(80));
+  delay(d);
   //iki mundur D
   pwm.setPWM(kakiD1, 0, pulseWidth(80)); tampil();//atasD
 
@@ -279,6 +280,7 @@ void kiri() {
   pwm.setPWM(kakiA1, 0, pulseWidth(40)); //atas A
   //iki mundur D
   pwm.setPWM(kakiD1, 0, pulseWidth(40)); //atasD
+  delay(d);
   //mundur C
   pwm.setPWM(kakiC1, 0, pulseWidth(40)); tampil();
 }
