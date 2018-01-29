@@ -132,7 +132,6 @@ void mundur(){
 
 }
 
-
 /*............Gerakan menghindar partial alias patah2...........*/
 
 //menghindar kanan

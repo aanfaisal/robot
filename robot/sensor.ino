@@ -1,5 +1,4 @@
 void lamp() {
-
   //deteksi api
   Serial.println("Api Terdeteksi");
   Serial.println("LED dan Pompa Nyala");

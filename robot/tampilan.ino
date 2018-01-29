@@ -1,5 +1,4 @@
 void baca() {
-
   //setting sound
   sensor = analogRead(sound);
 

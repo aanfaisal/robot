@@ -3,16 +3,21 @@
 #include <LiquidCrystal.h>
 //#include <SoftwareSerial.h>
 
-//Ini servo driver (defaults to addr 0x41)
+//pin 21 adalah SDA
+//pin 22 adalah SLC
+//Ini servo driver (defaults address 0x41 di i2c nya) 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x41);
 
-#define MIN_PULSE_WIDTH       771
-#define MAX_PULSE_WIDTH       3036
-#define DEFAULT_PULSE_WIDTH   1500
+#define MIN_PULSE_WIDTH       500
+#define MAX_PULSE_WIDTH       2500
+#define DEFAULT_PULSE_WIDTH   1250
 #define FREQUENCY             50
-#define SPEED                 300
+#define SPEED                 500
 
-int d = 150;                //delay sweep servo bawah
+int d = 50;                //delay sweep servo bawah
+
+//sensor kompass ( address 0x55 ) di i2c nya
+int kompas = 10;
 
 //ini sensor2 jarak ultrasonik
 //sensorjarak kiri
@@ -43,17 +48,41 @@ uint8_t kakiC2 = 15;
 uint8_t kakiD1 = 2;
 uint8_t kakiD2 = 3;
 
+//servo rumus kdua
+int h1 = 1;
+int l1 = 2;
+int h2 = 3;
+int l2 = 4;
+int h3 = 5;
+int l3 = 6;
+int h4 = 10;
+int l4 = 8;
+
+int up = 45;
+int frw = 45;
+int base = 0;
+int frw1 = 36;
+int up1 = 30;
+int up2 = 60;
+int frw2 = 60;
+
+int h1h = 90 + frw;
+int h2h = 90 - frw;
+int h3h = 90 - frw;
+int h4h = 90 + frw;
+
+
 //ini motor pompa
 int motor = 7;
 int sepid = 200;
 
-// Ini variabel sound dan flame
-int sound = A7;
+// Ini variabel sound 
+int sound = A9;
 int sensor = 0;
 
 //button digital
 int button = 52;
-// variables will change:
+//variables will change:
 int buttonState = 0;         // variable for reading the pushbutton status
 
 //sensor flame
@@ -73,12 +102,19 @@ int kondisi5;
 //ini lampu led merah
 int led = 53;
 
-//Ini variabel Sensor Garis
+//Ini variabel Sensor Garis 5 cenel
 int garis1 = A4;
 int garis2 = A5;
+int garis3 = A6;
+int garis4 = A7;
+int garis5 = A8;
+
 //line state sensor
 int gris1 = 0;
 int gris2 = 0;
+int gris3 = 0;
+int gris4 = 0;
+int gris5 = 0;
 
 
 //LiquidCrystal lcd(RS, E, D4, D5, D6, D7);
@@ -91,6 +127,11 @@ int i;
 int F;
 int disi[4];
 
+//ini variabel sensor sharp infrared jarak
+int pulsa0, cen0, pulsa1, cen1,pulsa2, cen2, pulsa3, cen3, pulsa4, cen4;
+int s;
+int T;
+int sharp[5];
 
 void setup()
 {
@@ -156,6 +197,44 @@ int pulseWidth(int angle)
   return analog_value;
 }
 
+/*
+//menyederhanakan rumus :v
+void muter(int pin, int angle) {
+  int value;
+  value = map(angle, 0, 180, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH);
+  pwm.setPWM(pin, 0, value);
+}
+//idlenya
+void idle() {
+  delay(100);
+}
+//contoh majune
+void maju() {
+  muter(l1, 90 - up);
+  muter(l4, 90 - up);
+  idle();
+  muter(h1, 90 + frw);
+  muter(h4, 90 - frw);
+  muter(h2, 90 + frw);
+  muter(h3, 90 - frw);
+  idle();
+  muter(l1, 90);
+  muter(l4, 90);
+  idle();
+  muter(l2, 90 + up);
+  muter(l3, 90 + up);
+  idle();
+  muter(h2, 90 - frw);
+  muter(h3, 90 + frw);
+  muter(h1, 90 - frw);
+  muter(h4, 90 + frw);
+  idle();
+  muter(l2, 90);
+  muter(l3, 90);
+  idle();
+}
+
+*/
 
 void loop() {
 
