@@ -48,6 +48,7 @@ uint8_t kakiC2 = 15;
 uint8_t kakiD1 = 2;
 uint8_t kakiD2 = 3;
 
+/*
 //servo rumus kdua
 int h1 = 1;
 int l1 = 2;
@@ -71,6 +72,7 @@ int h2h = 90 - frw;
 int h3h = 90 - frw;
 int h4h = 90 + frw;
 
+*/
 
 //ini motor pompa
 int motor = 7;
