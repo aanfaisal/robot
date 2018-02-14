@@ -1,15 +1,15 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 #include <LiquidCrystal.h>
-//#include <SoftwareSerial.h>
+#include <SoftwareSerial.h>
 
 //pin 21 adalah SDA
 //pin 22 adalah SLC
-//Ini servo driver (defaults address 0x41 di i2c nya) 
-Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x41);
+//Ini servo driver (defaults address 0x40 di i2c nya kosongin ae)
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
-#define MIN_PULSE_WIDTH       500
-#define MAX_PULSE_WIDTH       2500
+#define MIN_PULSE_WIDTH       550
+#define MAX_PULSE_WIDTH       2450
 #define DEFAULT_PULSE_WIDTH   1250
 #define FREQUENCY             50
 #define SPEED                 500
@@ -20,65 +20,38 @@ int d = 50;                //delay sweep servo bawah
 int kompas = 10;
 
 //ini sensor2 jarak ultrasonik
-//sensorjarak kiri
+//sensorjarak 1
 int trig_pin = 15;
 int echo_pin = 14;
-//sensorjarak serong kiri
+//sensorjarak 2
 int trig_pin1 = 36;
 int echo_pin1 = 37;
-//sensorjarak tengah
+//sensorjarak 3
 int trig_pin2 = 30;
 int echo_pin2 = 31;
-//sensorjarak serong kanan
+//sensorjarak 4
 int trig_pin3 = 23;
 int echo_pin3 = 22;
-//sensorjarak kanan
+//sensorjarak 5
 int trig_pin4 = 10;
 int echo_pin4 = 11;
-
 
 //Servo 1~8
 // Kaki Servonya dikasih
 uint8_t kakiA1 = 0;
 uint8_t kakiA2 = 1;
-uint8_t kakiB1 = 12;
-uint8_t kakiB2 = 13;
-uint8_t kakiC1 = 14;
-uint8_t kakiC2 = 15;
-uint8_t kakiD1 = 2;
-uint8_t kakiD2 = 3;
-
-/*
-//servo rumus kdua
-int h1 = 1;
-int l1 = 2;
-int h2 = 3;
-int l2 = 4;
-int h3 = 5;
-int l3 = 6;
-int h4 = 10;
-int l4 = 8;
-
-int up = 45;
-int frw = 45;
-int base = 0;
-int frw1 = 36;
-int up1 = 30;
-int up2 = 60;
-int frw2 = 60;
-
-int h1h = 90 + frw;
-int h2h = 90 - frw;
-int h3h = 90 - frw;
-int h4h = 90 + frw;
-
-*/
+uint8_t kakiB1 = 2;
+uint8_t kakiB2 = 3;
+uint8_t kakiC1 = 4;
+uint8_t kakiC2 = 5;
+uint8_t kakiD1 = 6;
+uint8_t kakiD2 = 7;
 
 //ini motor pompa
 int motor = 7;
 int sepid = 200;
 
-// Ini variabel sound 
+// Ini variabel sound
 int sound = A9;
 int sensor = 0;
 
@@ -130,7 +103,7 @@ int F;
 int disi[4];
 
 //ini variabel sensor sharp infrared jarak
-int pulsa0, cen0, pulsa1, cen1,pulsa2, cen2, pulsa3, cen3, pulsa4, cen4;
+int pulsa0, cen0, pulsa1, cen1, pulsa2, cen2, pulsa3, cen3, pulsa4, cen4;
 int s;
 int T;
 int sharp[5];
@@ -199,64 +172,9 @@ int pulseWidth(int angle)
   return analog_value;
 }
 
-/*
-//menyederhanakan rumus :v
-void muter(int pin, int angle) {
-  int value;
-  value = map(angle, 0, 180, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH);
-  pwm.setPWM(pin, 0, value);
-}
-//idlenya
-void idle() {
-  delay(100);
-}
-//contoh majune
-void maju() {
-  muter(l1, 90 - up);
-  muter(l4, 90 - up);
-  idle();
-  muter(h1, 90 + frw);
-  muter(h4, 90 - frw);
-  muter(h2, 90 + frw);
-  muter(h3, 90 - frw);
-  idle();
-  muter(l1, 90);
-  muter(l4, 90);
-  idle();
-  muter(l2, 90 + up);
-  muter(l3, 90 + up);
-  idle();
-  muter(h2, 90 - frw);
-  muter(h3, 90 + frw);
-  muter(h1, 90 - frw);
-  muter(h4, 90 + frw);
-  idle();
-  muter(l2, 90);
-  muter(l3, 90);
-  idle();
-}
-
-*/
-
 void loop() {
 
   baca();
-
   algoritma();
-
-//  //       api();
-//
-//    Serial.print("nomer 0 = ");
-//    Serial.println(gris1);
-//    Serial.print("nomer 1 = ");
-//    Serial.println(gris2);
-//    Serial.print("nomer 2 = ");
-//    Serial.println(kondisi3);
-//    Serial.print("nomer 3 = ");
-//    Serial.println(kondisi4);
-//    Serial.print("nomer 4 = ");
-//    Serial.println(kondisi5);
-  
-//    delay(1000);
 
 }

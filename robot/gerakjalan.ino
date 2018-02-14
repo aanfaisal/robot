@@ -1,20 +1,20 @@
-void standby1(){
+void standby1() {
   //kaki bagian A standby
-  pwm.setPWM(kakiA1, 0, pulseWidth(60));
-  pwm.setPWM(kakiA2, 0, pulseWidth(60));
+  pwm.setPWM(kakiA1, 0, pulseWidth(90));
+  pwm.setPWM(kakiA2, 0, pulseWidth(90));
   //kaki bagian B standby
-  pwm.setPWM(kakiB1, 0, pulseWidth(60));
-  pwm.setPWM(kakiB2, 0, pulseWidth(60));
+  pwm.setPWM(kakiB1, 0, pulseWidth(90));
+  pwm.setPWM(kakiB2, 0, pulseWidth(90));
   //kaki bagian C standby
-  pwm.setPWM(kakiC1, 0, pulseWidth(60));
-  pwm.setPWM(kakiC2, 0, pulseWidth(60));
+  pwm.setPWM(kakiC1, 0, pulseWidth(90));
+  pwm.setPWM(kakiC2, 0, pulseWidth(90));
   //kaki bagian D standby
-  pwm.setPWM(kakiD1, 0, pulseWidth(60));
-  pwm.setPWM(kakiD2, 0, pulseWidth(60));
+  pwm.setPWM(kakiD1, 0, pulseWidth(90));
+  pwm.setPWM(kakiD2, 0, pulseWidth(90));
 }
 
 // kalo menemukan api
-void standby2(){
+void standby2() {
   //sweep
   pwm.setPWM(kakiA2, 0, pulseWidth(40));
   delay(d);
@@ -43,7 +43,7 @@ void standby2(){
 
 /*.............gerakan memulai berjalan..............*/
 //gerak maju______sweep di bagian maju
-void maju(){
+void maju() {
   //iki mundur
   pwm.setPWM(kakiA1, 0, pulseWidth(100)); tampil();
 
@@ -88,7 +88,7 @@ void maju(){
 }
 
 //gerak mundur_____sweep di bagian mundur
-void mundur(){
+void mundur() {
   //iki maju
   pwm.setPWM(kakiC1, 0, pulseWidth(80)); //atasC
 
@@ -135,7 +135,7 @@ void mundur(){
 /*............Gerakan menghindar partial alias patah2...........*/
 
 //menghindar kanan
-void hindar_kanan(){
+void hindar_kanan() {
   //sweep B
   pwm.setPWM(kakiB2, 0, pulseWidth(35));
   delay(d);
@@ -167,7 +167,7 @@ void hindar_kanan(){
 }
 
 //menghindar kiri
-void hindar_kiri(){
+void hindar_kiri() {
   //sweep A
   pwm.setPWM(kakiA2, 0, pulseWidth(35));
   delay(d);
@@ -200,7 +200,7 @@ void hindar_kiri(){
 /*...............gerakan berbelok...............*/
 
 //Belok Kanan
-void kanan(){
+void kanan() {
 
   //sweep A
   pwm.setPWM(kakiA2, 0, pulseWidth(30));
@@ -223,14 +223,14 @@ void kanan(){
   pwm.setPWM(kakiC1, 0, pulseWidth(20)); //atasC
   pwm.setPWM(kakiC2, 0, pulseWidth(60));
 
-     //sweep D
+  //sweep D
   pwm.setPWM(kakiD2, 0, pulseWidth(30));
   delay(SPEED);
   //iki maju
   pwm.setPWM(kakiD1, 0, pulseWidth(20)); tampil();//atasD
   pwm.setPWM(kakiD2, 0, pulseWidth(60));
-  
- 
+
+
   //iki mundur A
   pwm.setPWM(kakiA1, 0, pulseWidth(100)); //atas A
   //iki mundur B
@@ -240,15 +240,12 @@ void kanan(){
   //iki mundur D
   delay(d);
   pwm.setPWM(kakiD1, 0, pulseWidth(100)); tampil();//atasD
-  
- 
+
+
 }
 
 //Belok Kiri
-void kiri(){
-  
-
-  
+void kiri() {
   //sweep B
   pwm.setPWM(kakiB2, 0, pulseWidth(30));
   delay(SPEED);
@@ -270,7 +267,7 @@ void kiri(){
   pwm.setPWM(kakiD1, 0, pulseWidth(100)); //atasD
   pwm.setPWM(kakiD2, 0, pulseWidth(60));
 
-    //sweep C
+  //sweep C
   pwm.setPWM(kakiC2, 0, pulseWidth(30));
   delay(SPEED);
   //iki maju
@@ -285,13 +282,13 @@ void kiri(){
   pwm.setPWM(kakiD1, 0, pulseWidth(40)); //atasD
   //mundur C
   pwm.setPWM(kakiC1, 0, pulseWidth(40)); tampil();
-  
+
 }
 
 /*............Gerakan putar kanan kiri...........*/
 
 //jalan putar kanan
-void putar_kanan(){
+void putar_kanan() {
   kanan();
   kanan();
   kanan();
@@ -299,7 +296,7 @@ void putar_kanan(){
 }
 
 //jalan putar kiri
-void putar_kiri(){
+void putar_kiri() {
   kiri();
   kiri();
   kiri();
