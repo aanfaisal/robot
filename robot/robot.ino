@@ -8,8 +8,8 @@
 //Ini servo driver (defaults address 0x40 di i2c nya kosongin ae)
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
-#define MIN_PULSE_WIDTH       550
-#define MAX_PULSE_WIDTH       2450
+#define MIN_PULSE_WIDTH       500
+#define MAX_PULSE_WIDTH       2500
 #define DEFAULT_PULSE_WIDTH   1250
 #define FREQUENCY             50
 #define SPEED                 500
@@ -174,7 +174,6 @@ int pulseWidth(int angle)
 
 void loop() {
 
-  baca();
-  algoritma();
+  baca();standby1();
 
 }

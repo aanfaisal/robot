@@ -45,45 +45,45 @@ void standby2() {
 //gerak maju______sweep di bagian maju
 void maju() {
   //iki mundur
-  pwm.setPWM(kakiA1, 0, pulseWidth(100)); tampil();
+  pwm.setPWM(kakiA1, 0, pulseWidth(110)); tampil();
 
   //sweep B
-  pwm.setPWM(kakiB2, 0, pulseWidth(38));
+  pwm.setPWM(kakiB2, 0, pulseWidth(60));
   delay(d);
   //iki maju B
-  pwm.setPWM(kakiB1, 0, pulseWidth(80)); tampil();//atasB
-  pwm.setPWM(kakiB2, 0, pulseWidth(62));
+  pwm.setPWM(kakiB1, 0, pulseWidth(110)); tampil();//atasB
+  pwm.setPWM(kakiB2, 0, pulseWidth(90));
 
   //sweep D
-  pwm.setPWM(kakiD2, 0, pulseWidth(38));
+  pwm.setPWM(kakiD2, 0, pulseWidth(60));
   delay(d);
   delay(d);
   //iki maju
-  pwm.setPWM(kakiD1, 0, pulseWidth(40)); //atasD
-  pwm.setPWM(kakiD2, 0, pulseWidth(60));
+  pwm.setPWM(kakiD1, 0, pulseWidth(60)); //atasD
+  pwm.setPWM(kakiD2, 0, pulseWidth(90));
 
   //iki mundur
-  pwm.setPWM(kakiC1, 0, pulseWidth(40)); tampil();
+  pwm.setPWM(kakiC1, 0, pulseWidth(70)); tampil();
 
   //...............batas suci........................//
   //iki mundur
-  pwm.setPWM(kakiB1, 0, pulseWidth(22)); tampil();
+  pwm.setPWM(kakiB1, 0, pulseWidth(70)); tampil();
 
   //sweep A
-  pwm.setPWM(kakiA2, 0, pulseWidth(38));
+  pwm.setPWM(kakiA2, 0, pulseWidth(60));
   delay(d);
   //iki maju
-  pwm.setPWM(kakiA1, 0, pulseWidth(40)); tampil();//atasA
-  pwm.setPWM(kakiA2, 0, pulseWidth(60));
+  pwm.setPWM(kakiA1, 0, pulseWidth(70)); tampil();//atasA
+  pwm.setPWM(kakiA2, 0, pulseWidth(90));
 
   //sweep C
-  pwm.setPWM(kakiC2, 0, pulseWidth(38));
+  pwm.setPWM(kakiC2, 0, pulseWidth(60));
   delay(d);
   //iki maju
-  pwm.setPWM(kakiC1, 0, pulseWidth(80)); tampil();//atasC
-  pwm.setPWM(kakiC2, 0, pulseWidth(60));
+  pwm.setPWM(kakiC1, 0, pulseWidth(110)); tampil();//atasC
+  pwm.setPWM(kakiC2, 0, pulseWidth(90));
   //iki mundur
-  pwm.setPWM(kakiD1, 0, pulseWidth(80)); tampil();
+  pwm.setPWM(kakiD1, 0, pulseWidth(110)); tampil();
 
 }
 
@@ -287,6 +287,10 @@ void kiri() {
 
 /*............Gerakan putar kanan kiri...........*/
 
+
+void nol(){
+  pwm.setPWM(kakiA1, 0, pulseWidth(110)); tampil();
+}
 //jalan putar kanan
 void putar_kanan() {
   kanan();
