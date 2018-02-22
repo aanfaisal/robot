@@ -1,9 +1,5 @@
 void algoritma() {
-
-  //  dengan begini robot akan mengikuti wall kanan
-  //  standby1();
-  //  delay(200);
-
+  
   while (sensor < 170 || buttonState == HIGH) {
     if (cm0 <= 6)           //kiri
     {
