@@ -64,17 +64,17 @@ void tampil() {
 //  pulse4 = pulseIn(echo_pin4, HIGH);
 //  cm4 = pulse4 / 58.138;
 
-  //set kursor tampilan jarak
-  lcd.setCursor(0, 0);
-  lcd.print(cm0);
-  lcd.setCursor(3, 0);
-  lcd.print(cm1);
-  lcd.setCursor(6, 0);
-  lcd.print(cm2);
-  lcd.setCursor(9, 0);
-  lcd.print(cm3);
-  lcd.setCursor(12, 0);
-  lcd.print(cm4);
+//  //set kursor tampilan jarak
+//  lcd.setCursor(0, 0);
+//  lcd.print(cm0);
+//  lcd.setCursor(3, 0);
+//  lcd.print(cm1);
+//  lcd.setCursor(6, 0);
+//  lcd.print(cm2);
+//  lcd.setCursor(9, 0);
+//  lcd.print(cm3);
+//  lcd.setCursor(12, 0);
+//  lcd.print(cm4);
 
   //set cursor tampilan flame
   lcd.setCursor(0, 1);

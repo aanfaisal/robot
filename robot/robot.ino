@@ -17,7 +17,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
 /*---------------------------DEFINISI SRF-------------------------------------*/
 #define SONAR_NUM     5 // banyaknya SRF-04 ultrasonik.
-#define MAX_DISTANCE 200 // Maksimum deteksi (in cm) buat nge ping.
+#define MAX_DISTANCE 200 // Maksimum deteksi (pd cm) buat nge ping.
 #define PING_INTERVAL 33 // Milliseconds antara sensor pings (29ms minimalnya buat ngindari cross-sensor echo tabrakan).
 
 unsigned long pingTimer[SONAR_NUM]; // Holds the times when the next ping should happen for each sensor.
@@ -37,7 +37,6 @@ int d = 500;                //delay sweep servo bawah
 
 /*------Definisi pin sensor kompass ( address 0x55 ) di i2c nya----------------*/
 int kompas = 10;
-/*-----------------------------------------------------------------------------*/
 
 ////ini sensor2 jarak ultrasonik
 ////sensorjarak 1
@@ -65,24 +64,20 @@ uint8_t kakiC1 = 12;
 uint8_t kakiC2 = 13;
 uint8_t kakiD1 = 2;
 uint8_t kakiD2 = 3;
-/*-----------------------------------------------------------------------------*/
 
 /*-----------------------Definisi Pin Pompa -----------------------------------*/
 int motor = 7;
 int sepid = 200;
-/*-----------------------------------------------------------------------------*/
 
 /*-----------------------Definisi Pin Sound Sensor-----------------------------*/
 int sound = A9;
 int sensor = 0;
-/*-----------------------------------------------------------------------------*/
 
 /*----------------------Definisi Button ON-------------------------------------*/
 int button = 52;
 
 //variables will change:
 int buttonState = 0;         // variable for reading the pushbutton status
-/*-----------------------------------------------------------------------------*/
 
 /*----------------------Definisi Pin Sensor Api--------------------------------*/
 int api1 = 46;
@@ -97,7 +92,6 @@ int kondisi2;
 int kondisi3;
 int kondisi4;
 int kondisi5;
-/*-----------------------------------------------------------------------------*/
 
 /*-----------------------Definisi Pin LED Kedip2-------------------------------*/
 int led = 53;
@@ -118,15 +112,14 @@ int gris5 = 0;
 
 /*------------------LiquidCrystal lcd(RS, E, D4, D5, D6, D7);-----------------*/
 LiquidCrystal lcd(40, 41, 42, 43, 44, 45);
-/*----------------------------------------------------------------------------*/
 
-//Ini variabel sensor jarak
+/*--------------------Ini variabel sensor jarak------------------------------*/
 int pulse, cm0, pulse1, cm1, pulse2, cm2, pulse3, cm3, pulse4, cm4;
 int i;
 int F;
 int disi[4];
 
-//ini variabel sensor sharp infrared jarak
+/*---------------------ini variabel sensor sharp infrared jarak-------------*/
 int pulsa0, cen0, pulsa1, cen1, pulsa2, cen2, pulsa3, cen3, pulsa4, cen4;
 int s;
 int T;
@@ -137,29 +130,32 @@ void setup()
 
   Serial.begin(9600);
 
-  //pinmode flame
+  
+/*------------Pinmode Flame Sensor---------------------------------------*/
   pinMode(api1, INPUT);
   pinMode(api2, INPUT);
   pinMode(api3, INPUT);
   pinMode(api4, INPUT);
   pinMode(api5, INPUT);
 
-  //pin modenya untuk sound
+/*------------Pinmode Sound Sensor----------------------------------------*/
   pinMode(sound, INPUT);
 
-  //ini pinmode button
+/*------------Pinmode Button ON-------------------------------------------*/
   pinMode(button, INPUT);
 
-  //Ini pinmode untuk Sensor garis
+/*------------Pinmode Sensor Garis----------------------------------------*/
   pinMode(garis1, INPUT);
   pinMode(garis2, INPUT);
-
-  //ini pinmode lampu LED
+  pinMode(garis3, INPUT);
+  pinMode(garis4, INPUT);
+  pinMode(garis5, INPUT);
+/*------------Pinmode Lampu LED-------------------------------------------*/
   pinMode(led, OUTPUT);
-
+/*------------Pinmode Pompa-----------------------------------------------*/
   pinMode(motor, OUTPUT);
   
-/*--------------------------Buat Ngeping SRF-------------------------------*/
+/*--------------------------Buat Ngeping SRF-----------------------------------*/
   pingTimer[0] = millis() + 75;           // First ping starts at 75ms, gives time for the Arduino to chill before starting.
   for (uint8_t i = 1; i < SONAR_NUM; i++) // Set the starting time for each sensor.
     pingTimer[i] = pingTimer[i - 1] + PING_INTERVAL;
@@ -177,23 +173,20 @@ void setup()
 //  pinMode(trig_pin4, OUTPUT);
 //  pinMode(echo_pin4, INPUT);
 
-  //Nge Set LCD tu begini
+/*------------Nge Set LCD TU Begini-------------------------------------------*/
   lcd.begin(16, 2);
   lcd.setCursor(3, 0); //baris bawah
   lcd.print("BISMILLAH");
 
-  //lcd.begin(16, 2);
-  //lcd.setCursor(0,0); //baris atas
-  //lcd.print("BINTANG");
 
-  //Setting PWM
+/*------------Setting PWM Servo-----------------------------------------------*/  //Setting PWM
   pwm.begin();
   pwm.setPWMFreq(FREQUENCY);
 
 
 }
 
-//Ini rumus mumet buat konversi pulse ke angle alias derajat
+/*------------Ini rumus mumet buat konversi pulse ke angle alias derajat------*/
 int pulseWidth(int angle)
 {
   int pulse_wide, analog_value;
@@ -203,7 +196,9 @@ int pulseWidth(int angle)
   return analog_value;
 }
 
+/*------------Yang Di Looping--------------------------------------------------*/
 void loop() {
+    loopingan();
     tampil();
     baca();
     standby1();
