@@ -4,8 +4,8 @@
 #include <SoftwareSerial.h>
 #include <NewPing.h>
 
-//pin 21 adalah SDA
-//pin 22 adalah SLC
+//pin 20 adalah SDA
+//pin 21 adalah SLC
 //Ini servo driver (defaults address 0x40 di i2c nya kosongin ae)
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
@@ -13,10 +13,11 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define MAX_PULSE_WIDTH       2500
 #define DEFAULT_PULSE_WIDTH   1250
 #define FREQUENCY             50
-#define SPEED                 2000
+#define SPEED                 200
+#define d                     500                //delay sweep servo bawah
 
 /*---------------------------DEFINISI SRF-------------------------------------*/
-#define SONAR_NUM     5 // banyaknya SRF-04 ultrasonik.
+#define SONAR_NUM     3 // banyaknya SRF-04 ultrasonik.
 #define MAX_DISTANCE 200 // Maksimum deteksi (pd cm) buat nge ping.
 #define PING_INTERVAL 33 // Milliseconds antara sensor pings (29ms minimalnya buat ngindari cross-sensor echo tabrakan).
 
@@ -28,42 +29,21 @@ NewPing sonar[SONAR_NUM] = {     // Array Sensor. NewPing(triggernya, echonya, m
   NewPing(41, 42, MAX_DISTANCE), 
   NewPing(43, 44, MAX_DISTANCE),
   NewPing(45, 20, MAX_DISTANCE),
-  NewPing(21, 22, MAX_DISTANCE),
-  NewPing(23, 24, MAX_DISTANCE),
 };
 /*-----------------------------------------------------------------------------*/
-
-int d = 500;                //delay sweep servo bawah
 
 /*------Definisi pin sensor kompass ( address 0x55 ) di i2c nya----------------*/
 int kompas = 10;
 
-////ini sensor2 jarak ultrasonik
-////sensorjarak 1
-//int trig_pin = 15;
-//int echo_pin = 14;
-////sensorjarak 2
-//int trig_pin1 = 36;
-//int echo_pin1 = 37;
-////sensorjarak 3
-//int trig_pin2 = 30;
-//int echo_pin2 = 31;
-////sensorjarak 4
-//int trig_pin3 = 23;
-//int echo_pin3 = 22;
-////sensorjarak 5
-//int trig_pin4 = 10;
-//int echo_pin4 = 11;
-
 /*--------------------Definisi Pin Kaki Servonya------------------------------*/
 uint8_t kakiA1 = 0;
 uint8_t kakiA2 = 1;
-uint8_t kakiB1 = 14;
-uint8_t kakiB2 = 15;
-uint8_t kakiC1 = 12;
-uint8_t kakiC2 = 13;
-uint8_t kakiD1 = 2;
-uint8_t kakiD2 = 3;
+uint8_t kakiB1 = 12;
+uint8_t kakiB2 = 13;
+uint8_t kakiC1 = 14;
+uint8_t kakiC2 = 15;
+uint8_t kakiD1 = 4;
+uint8_t kakiD2 = 5;
 
 /*-----------------------Definisi Pin Pompa -----------------------------------*/
 int motor = 7;
@@ -72,12 +52,6 @@ int sepid = 200;
 /*-----------------------Definisi Pin Sound Sensor-----------------------------*/
 int sound = A9;
 int sensor = 0;
-
-/*----------------------Definisi Button ON-------------------------------------*/
-int button = 52;
-
-//variables will change:
-int buttonState = 0;         // variable for reading the pushbutton status
 
 /*----------------------Definisi Pin Sensor Api--------------------------------*/
 int api1 = 46;
@@ -97,11 +71,11 @@ int kondisi5;
 int led = 53;
 
 //Ini variabel Sensor Garis 5 cenel
-int garis1 = A4;
-int garis2 = A5;
-int garis3 = A6;
-int garis4 = A7;
-int garis5 = A8;
+int garis1 = A14;
+int garis2 = A13;
+int garis3 = A12;
+int garis4 = A11;
+int garis5 = A10;
 
 //line state sensor
 int gris1 = 0;
@@ -111,7 +85,7 @@ int gris4 = 0;
 int gris5 = 0;
 
 /*------------------LiquidCrystal lcd(RS, E, D4, D5, D6, D7);-----------------*/
-LiquidCrystal lcd(40, 41, 42, 43, 44, 45);
+LiquidCrystal lcd(39, 40, 41, 42, 43, 44);
 
 /*--------------------Ini variabel sensor jarak------------------------------*/
 int pulse, cm0, pulse1, cm1, pulse2, cm2, pulse3, cm3, pulse4, cm4;
@@ -141,9 +115,6 @@ void setup()
 /*------------Pinmode Sound Sensor----------------------------------------*/
   pinMode(sound, INPUT);
 
-/*------------Pinmode Button ON-------------------------------------------*/
-  pinMode(button, INPUT);
-
 /*------------Pinmode Sensor Garis----------------------------------------*/
   pinMode(garis1, INPUT);
   pinMode(garis2, INPUT);
@@ -161,28 +132,14 @@ void setup()
     pingTimer[i] = pingTimer[i - 1] + PING_INTERVAL;
 /*-----------------------------------------------------------------------------*/
 
-//  //Ini pinmode untuk Sensor jarak
-//  pinMode(trig_pin, OUTPUT);
-//  pinMode(echo_pin, INPUT);
-//  pinMode(trig_pin1, OUTPUT);
-//  pinMode(echo_pin1, INPUT);
-//  pinMode(trig_pin2, OUTPUT);
-//  pinMode(echo_pin2, INPUT);
-//  pinMode(trig_pin3, OUTPUT);
-//  pinMode(echo_pin3, INPUT);
-//  pinMode(trig_pin4, OUTPUT);
-//  pinMode(echo_pin4, INPUT);
-
 /*------------Nge Set LCD TU Begini-------------------------------------------*/
   lcd.begin(16, 2);
   lcd.setCursor(3, 0); //baris bawah
   lcd.print("BISMILLAH");
-
-
+  
 /*------------Setting PWM Servo-----------------------------------------------*/  //Setting PWM
   pwm.begin();
   pwm.setPWMFreq(FREQUENCY);
-
 
 }
 
@@ -192,15 +149,13 @@ int pulseWidth(int angle)
   int pulse_wide, analog_value;
   pulse_wide   = map(angle, 0, 180, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH);
   analog_value = int(float(pulse_wide) / 1000000 * FREQUENCY * 4096);
-  Serial.println(analog_value);
+  //Serial.println(analog_value);
   return analog_value;
 }
 
 /*------------Yang Di Looping--------------------------------------------------*/
 void loop() {
     loopingan();
-    tampil();
-    baca();
-    standby1();
+    standby1();//hindar_kanan();
 }
 

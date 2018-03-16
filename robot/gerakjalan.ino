@@ -44,91 +44,11 @@ void standby2() {
 /*.............gerakan memulai berjalan..............*/
 //gerak maju______sweep di bagian maju
 void maju() {
-  //iki mundur
-  pwm.setPWM(kakiA1, 0, pulseWidth(110)); 
-
-  //sweep B
-  pwm.setPWM(kakiB2, 0, pulseWidth(60));
-  delay(d);
-  //iki maju B
-  pwm.setPWM(kakiB1, 0, pulseWidth(110)); //atasB
-  pwm.setPWM(kakiB2, 0, pulseWidth(90));
-
-  //sweep D
-  pwm.setPWM(kakiD2, 0, pulseWidth(60));
-  delay(d);
-  delay(d);
-  //iki maju
-  pwm.setPWM(kakiD1, 0, pulseWidth(60)); //atasD
-  pwm.setPWM(kakiD2, 0, pulseWidth(90));
-
-  //iki mundur
-  pwm.setPWM(kakiC1, 0, pulseWidth(70)); 
-
-  //...............batas suci........................//
-  //iki mundur
-  pwm.setPWM(kakiB1, 0, pulseWidth(70)); 
-
-  //sweep A
-  pwm.setPWM(kakiA2, 0, pulseWidth(60));
-  delay(d);
-  //iki maju
-  pwm.setPWM(kakiA1, 0, pulseWidth(70)); //atasA
-  pwm.setPWM(kakiA2, 0, pulseWidth(90));
-
-  //sweep C
-  pwm.setPWM(kakiC2, 0, pulseWidth(60));
-  delay(d);
-  //iki maju
-  pwm.setPWM(kakiC1, 0, pulseWidth(110)); //atasC
-  pwm.setPWM(kakiC2, 0, pulseWidth(90));
-  //iki mundur
-  pwm.setPWM(kakiD1, 0, pulseWidth(110)); 
-
+ 
 }
 
 //gerak mundur_____sweep di bagian mundur
 void mundur() {
-  //iki maju
-  pwm.setPWM(kakiC1, 0, pulseWidth(80)); //atasC
-
-  //sweep D
-  pwm.setPWM(kakiD2, 0, pulseWidth(45));
-  delay(d);
-  //iki mundur
-  pwm.setPWM(kakiD1, 0, pulseWidth(80));
-  pwm.setPWM(kakiD2, 0, pulseWidth(60));
-
-  //sweep B
-  pwm.setPWM(kakiB2, 0, pulseWidth(45));
-  delay(d);
-  //iki mundur
-  pwm.setPWM(kakiB1, 0, pulseWidth(40));
-  pwm.setPWM(kakiB2, 0, pulseWidth(60));
-
-  //iki maju
-  pwm.setPWM(kakiA1, 0, pulseWidth(40)); //atasA
-
-  //...............batas suci........................//
-  //iki maju D
-  pwm.setPWM(kakiD1, 0, pulseWidth(40)); //atasD
-
-  //sweep C
-  pwm.setPWM(kakiC2, 0, pulseWidth(45));
-  delay(d);
-  //iki mundur C
-  pwm.setPWM(kakiC1, 0, pulseWidth(40));
-  pwm.setPWM(kakiC2, 0, pulseWidth(60));
-
-  //sweep A
-  pwm.setPWM(kakiA2, 0, pulseWidth(45));
-  delay(d);
-  //iki mundur A
-  pwm.setPWM(kakiA1, 0, pulseWidth(80));
-  pwm.setPWM(kakiA2, 0, pulseWidth(60));
-
-  //iki maju B
-  pwm.setPWM(kakiB1, 0, pulseWidth(80)); //atasB
 
 }
 

@@ -1,6 +1,6 @@
 void algoritma() {
   
-  while (sensor < 170 || buttonState == HIGH) {
+  while (sensor < 170) {
     if (cm0 <= 6)           //kiri
     {
       hindar_kiri();
