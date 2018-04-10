@@ -101,10 +101,8 @@ int sharp[5];
 
 void setup()
 {
-
   Serial.begin(9600);
 
-  
 /*------------Pinmode Flame Sensor---------------------------------------*/
   pinMode(api1, INPUT);
   pinMode(api2, INPUT);
@@ -121,8 +119,10 @@ void setup()
   pinMode(garis3, INPUT);
   pinMode(garis4, INPUT);
   pinMode(garis5, INPUT);
+  
 /*------------Pinmode Lampu LED-------------------------------------------*/
   pinMode(led, OUTPUT);
+  
 /*------------Pinmode Pompa-----------------------------------------------*/
   pinMode(motor, OUTPUT);
   
@@ -156,6 +156,8 @@ int pulseWidth(int angle)
 /*------------Yang Di Looping--------------------------------------------------*/
 void loop() {
     loopingan();
-    standby1();//hindar_kanan();
+    standby1();
+    //maju();
+    //hindar_kanan();
 }
 
